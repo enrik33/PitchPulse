@@ -1,4 +1,4 @@
-﻿function healthController(req, res) {
+function healthController(req, res) {
   res.status(200).json({
     status: "ok",
     service: "pitchpulse-api",

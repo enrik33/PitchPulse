@@ -1,4 +1,4 @@
-﻿export default function StandingsTable({ rows = [] }) {
+export default function StandingsTable({ rows = [] }) {
   return (
     <div className="overflow-x-auto rounded-lg border bg-white">
       <table className="min-w-full text-left text-sm">

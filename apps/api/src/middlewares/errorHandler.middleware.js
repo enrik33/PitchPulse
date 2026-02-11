@@ -1,4 +1,4 @@
-﻿function errorHandlerMiddleware(error, req, res, _next) {
+function errorHandlerMiddleware(error, req, res, _next) {
   const status = Number(error?.statusCode || error?.status || 500);
 
   res.status(status).json({

@@ -1,4 +1,4 @@
-﻿function mapMatchSummary(match) {
+function mapMatchSummary(match) {
   return {
     id: match?.id ?? null,
     utcDate: match?.utcDate ?? null,

@@ -1,4 +1,4 @@
-﻿const axios = require("axios");
+const axios = require("axios");
 const { env } = require("../config/env");
 
 const footballDataClient = axios.create({

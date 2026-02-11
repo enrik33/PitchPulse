@@ -1,4 +1,4 @@
-﻿import MatchCard from "./MatchCard";
+import MatchCard from "./MatchCard";
 import EmptyState from "../common/EmptyState";
 
 export default function MatchList({ matches = [] }) {

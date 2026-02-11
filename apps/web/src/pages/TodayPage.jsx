@@ -1,4 +1,4 @@
-﻿import MatchList from "../components/match/MatchList";
+import MatchList from "../components/match/MatchList";
 import { useTodayMatches } from "../hooks/useTodayMatches";
 import LoadingSkeleton from "../components/common/LoadingSkeleton";
 import ErrorState from "../components/common/ErrorState";

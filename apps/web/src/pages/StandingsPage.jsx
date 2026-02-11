@@ -1,4 +1,4 @@
-﻿import StandingsTable from "../components/standings/StandingsTable";
+import StandingsTable from "../components/standings/StandingsTable";
 import { useStandings } from "../hooks/useStandings";
 import LoadingSkeleton from "../components/common/LoadingSkeleton";
 import ErrorState from "../components/common/ErrorState";

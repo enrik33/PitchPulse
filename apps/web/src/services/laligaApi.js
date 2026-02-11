@@ -1,4 +1,4 @@
-﻿import { apiGet } from "./apiClient";
+import { apiGet } from "./apiClient";
 
 export async function getTodayMatches() {
   const data = await apiGet("/laliga/matches/today");

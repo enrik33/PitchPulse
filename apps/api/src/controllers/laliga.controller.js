@@ -1,4 +1,4 @@
-﻿const { getTodayMatches, getStandings } = require("../services/laliga.service");
+const { getTodayMatches, getStandings } = require("../services/laliga.service");
 
 async function getTodayMatchesController(req, res, next) {
   try {
