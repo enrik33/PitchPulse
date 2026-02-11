@@ -1,4 +1,4 @@
-﻿import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Layout from "../components/layout/Layout";
 import TodayPage from "../pages/TodayPage";
 import StandingsPage from "../pages/StandingsPage";

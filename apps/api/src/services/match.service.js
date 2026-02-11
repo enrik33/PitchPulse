@@ -1,4 +1,4 @@
-﻿const { getMatchByIdFromProvider } = require("../providers/footballData.provider");
+const { getMatchByIdFromProvider } = require("../providers/footballData.provider");
 const { mapMatchSummary, mapMatchDetail } = require("../mappers/match.mapper");
 
 async function getMatchById(matchId) {

@@ -1,4 +1,4 @@
-﻿function mapStandingsRow(row) {
+function mapStandingsRow(row) {
   return {
     position: row?.position ?? null,
     team: {

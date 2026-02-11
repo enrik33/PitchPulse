@@ -1,4 +1,4 @@
-﻿const express = require("express");
+const express = require("express");
 const { getMatchByIdController } = require("../controllers/matches.controller");
 
 const router = express.Router();

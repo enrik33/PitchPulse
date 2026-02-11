@@ -1,4 +1,4 @@
-﻿import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import MatchHeader from "../components/match/MatchHeader";
 import LoadingSkeleton from "../components/common/LoadingSkeleton";
 import ErrorState from "../components/common/ErrorState";

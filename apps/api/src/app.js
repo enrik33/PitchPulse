@@ -1,4 +1,4 @@
-﻿const express = require("express");
+const express = require("express");
 const cors = require("cors");
 const routes = require("./routes");
 const { requestIdMiddleware } = require("./middlewares/requestId.middleware");

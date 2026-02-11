@@ -1,4 +1,4 @@
-﻿function requestLoggerMiddleware(req, res, next) {
+function requestLoggerMiddleware(req, res, next) {
   const start = Date.now();
 
   res.on("finish", () => {

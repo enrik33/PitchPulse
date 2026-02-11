@@ -1,4 +1,4 @@
-﻿const { getMatchById } = require("../services/match.service");
+const { getMatchById } = require("../services/match.service");
 
 async function getMatchByIdController(req, res, next) {
   try {

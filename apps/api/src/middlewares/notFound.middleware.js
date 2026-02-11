@@ -1,4 +1,4 @@
-﻿function notFoundMiddleware(req, res) {
+function notFoundMiddleware(req, res) {
   res.status(404).json({
     error: {
       code: "NOT_FOUND",

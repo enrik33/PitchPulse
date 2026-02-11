@@ -1,4 +1,4 @@
-﻿export default function MatchHeader({ match }) {
+export default function MatchHeader({ match }) {
   if (!match) return null;
 
   return (

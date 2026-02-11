@@ -1,4 +1,4 @@
-﻿const { getTodayMatchesFromProvider, getStandingsFromProvider } = require("../providers/footballData.provider");
+const { getTodayMatchesFromProvider, getStandingsFromProvider } = require("../providers/footballData.provider");
 const { mapMatchSummary } = require("../mappers/match.mapper");
 const { mapStandingsRow } = require("../mappers/standings.mapper");
 
