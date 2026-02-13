@@ -10,9 +10,9 @@ const { errorHandlerMiddleware } = require("./middlewares/errorHandler.middlewar
 const app = express();
 
 app.use(cors());
-app.use(express.json());
 app.use(requestIdMiddleware);
 app.use(requestLoggerMiddleware);
+app.use(express.json());
 app.use("/api", apiRateLimit);
 app.use("/api", routes);
 app.use(notFoundMiddleware);
