@@ -1,0 +1,13 @@
+{
+  "name": "pitchpulse",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "concurrently -n api,web -c cyan,magenta \"npm run dev --prefix apps/api\" \"npm run dev --prefix apps/web\"",
+    "dev:api": "npm run dev --prefix apps/api",
+    "dev:web": "npm run dev --prefix apps/web"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  }
+}
