@@ -10,8 +10,8 @@ export default function TodayPage() {
   if (isError) return <ErrorState message={error?.message} />;
 
   return (
-    <section className="space-y-4">
-      <h1 className="text-2xl font-semibold">Today Matches</h1>
+    <section className="pp-page">
+      <h1 className="pp-page-title">Today Matches</h1>
       <MatchList matches={data ?? []} />
     </section>
   );

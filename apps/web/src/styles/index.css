@@ -2,7 +2,168 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  margin: 0;
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+@layer base {
+  :root {
+    /* Brand tokens (logo-derived green + neutral gray family) */
+    --pp-brand-700: 16 134 80;
+    --pp-brand-600: 22 163 74;
+    --pp-brand-500: 34 197 94;
+    --pp-brand-100: 220 252 231;
+
+    --pp-neutral-950: 20 24 28;
+    --pp-neutral-900: 31 41 55;
+    --pp-neutral-700: 75 85 99;
+    --pp-neutral-500: 107 114 128;
+    --pp-neutral-300: 209 213 219;
+    --pp-neutral-200: 229 231 235;
+    --pp-neutral-100: 243 244 246;
+    --pp-neutral-50: 249 250 251;
+    --pp-white: 255 255 255;
+
+    /* Typography scale */
+    --pp-text-xs: 0.75rem;
+    --pp-text-sm: 0.875rem;
+    --pp-text-base: 1rem;
+    --pp-text-lg: 1.125rem;
+    --pp-text-xl: 1.25rem;
+    --pp-text-2xl: 1.5rem;
+
+    /* Spacing & shape */
+    --pp-space-1: 0.25rem;
+    --pp-space-2: 0.5rem;
+    --pp-space-3: 0.75rem;
+    --pp-space-4: 1rem;
+    --pp-space-6: 1.5rem;
+    --pp-space-8: 2rem;
+    --pp-radius-sm: 0.5rem;
+    --pp-radius-md: 0.75rem;
+    --pp-radius-lg: 1rem;
+
+    /* Shadows */
+    --pp-shadow-sm: 0 1px 2px rgba(20, 24, 28, 0.06);
+    --pp-shadow-md: 0 10px 24px rgba(20, 24, 28, 0.08);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: "Segoe UI", "Inter", system-ui, -apple-system, sans-serif;
+    color: rgb(var(--pp-neutral-900));
+    background:
+      radial-gradient(1200px 400px at 20% -10%, rgba(34, 197, 94, 0.12), transparent 60%),
+      linear-gradient(rgb(var(--pp-neutral-50)), rgb(var(--pp-white)));
+  }
+}
+
+@layer components {
+  .pp-app-shell {
+    @apply min-h-screen;
+    color: rgb(var(--pp-neutral-900));
+  }
+
+  .pp-page-container {
+    @apply mx-auto max-w-6xl px-4 py-8;
+  }
+
+  .pp-nav {
+    @apply border-b;
+    border-color: rgb(var(--pp-neutral-200));
+    background-color: rgba(var(--pp-white), 0.85);
+    backdrop-filter: blur(8px);
+  }
+
+  .pp-nav-inner {
+    @apply mx-auto flex max-w-6xl items-center gap-2 px-4 py-3;
+  }
+
+  .pp-nav-link {
+    @apply rounded-md px-3 py-2 text-sm font-semibold transition-colors;
+    color: rgb(var(--pp-neutral-700));
+  }
+
+  .pp-nav-link:hover {
+    background-color: rgb(var(--pp-neutral-100));
+    color: rgb(var(--pp-neutral-900));
+  }
+
+  .pp-nav-link-active {
+    background-color: rgb(var(--pp-brand-600));
+    color: rgb(var(--pp-white));
+  }
+
+  .pp-page {
+    @apply space-y-4;
+  }
+
+  .pp-page-title {
+    font-size: var(--pp-text-2xl);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: rgb(var(--pp-neutral-950));
+  }
+
+  .pp-surface {
+    @apply border;
+    border-color: rgb(var(--pp-neutral-200));
+    border-radius: var(--pp-radius-md);
+    background-color: rgb(var(--pp-white));
+    box-shadow: var(--pp-shadow-sm);
+  }
+
+  .pp-muted {
+    color: rgb(var(--pp-neutral-500));
+  }
+
+  .pp-state-empty {
+    @apply p-6 text-center;
+  }
+
+  .pp-state-error {
+    @apply border p-4;
+    border-radius: var(--pp-radius-md);
+    border-color: rgb(254 202 202);
+    background-color: rgb(254 242 242);
+    color: rgb(153 27 27);
+  }
+
+  .pp-skeleton {
+    @apply animate-pulse;
+    border-radius: var(--pp-radius-sm);
+    background-color: rgb(var(--pp-neutral-200));
+  }
+
+  .pp-match-card {
+    @apply block p-4 transition;
+    border-radius: var(--pp-radius-md);
+    border: 1px solid rgb(var(--pp-neutral-200));
+    background-color: rgb(var(--pp-white));
+    box-shadow: var(--pp-shadow-sm);
+  }
+
+  .pp-match-card:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--pp-shadow-md);
+  }
+
+  .pp-status-chip {
+    @apply inline-flex items-center rounded-full px-2 py-1 text-xs font-semibold;
+    background-color: rgb(var(--pp-brand-100));
+    color: rgb(var(--pp-brand-700));
+  }
+
+  .pp-table-wrap {
+    @apply overflow-x-auto border;
+    border-radius: var(--pp-radius-md);
+    border-color: rgb(var(--pp-neutral-200));
+    background-color: rgb(var(--pp-white));
+    box-shadow: var(--pp-shadow-sm);
+  }
+
+  .pp-table-head {
+    background-color: rgb(var(--pp-neutral-100));
+    color: rgb(var(--pp-neutral-700));
+  }
 }

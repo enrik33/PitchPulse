@@ -2,11 +2,11 @@ import { NavLink } from "react-router-dom";
 
 export default function Navbar() {
   const linkClass = ({ isActive }) =>
-    `rounded px-3 py-2 text-sm font-medium ${isActive ? "bg-gray-900 text-white" : "text-gray-700 hover:bg-gray-200"}`;
+    `pp-nav-link ${isActive ? "pp-nav-link-active" : ""}`;
 
   return (
-    <header className="border-b bg-white">
-      <nav className="mx-auto flex max-w-6xl items-center gap-2 px-4 py-3">
+    <header className="pp-nav">
+      <nav className="pp-nav-inner">
         <NavLink to="/" className={linkClass}>
           Today
         </NavLink>

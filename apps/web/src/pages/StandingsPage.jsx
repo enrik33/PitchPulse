@@ -10,8 +10,8 @@ export default function StandingsPage() {
   if (isError) return <ErrorState message={error?.message} />;
 
   return (
-    <section className="space-y-4">
-      <h1 className="text-2xl font-semibold">Standings</h1>
+    <section className="pp-page">
+      <h1 className="pp-page-title">Standings</h1>
       <StandingsTable rows={data ?? []} />
     </section>
   );
