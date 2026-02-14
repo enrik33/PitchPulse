@@ -81,7 +81,7 @@ async function getMatchByIdFromProvider(matchId) {
 
   try {
     const { data } = await footballDataClient.get(`/matches/${matchId}`);
-    return data || {};
+    return data?.match || data || {};
   } catch (error) {
     throw mapAxiosError(error);
   }
