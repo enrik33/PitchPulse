@@ -1,4 +1,6 @@
 function mapMatchSummary(match) {
+  const score = match?.score || {};
+
   return {
     id: match?.id ?? null,
     utcDate: match?.utcDate ?? null,
@@ -14,8 +16,16 @@ function mapMatchSummary(match) {
       crestUrl: match?.awayTeam?.crest ?? match?.awayTeam?.crestUrl ?? null
     },
     score: {
-      home: match?.score?.fullTime?.home ?? match?.score?.home ?? null,
-      away: match?.score?.fullTime?.away ?? match?.score?.away ?? null
+      home:
+        score?.fullTime?.home ??
+        score?.regularTime?.home ??
+        score?.halfTime?.home ??
+        null,
+      away:
+        score?.fullTime?.away ??
+        score?.regularTime?.away ??
+        score?.halfTime?.away ??
+        null
     }
   };
 }
