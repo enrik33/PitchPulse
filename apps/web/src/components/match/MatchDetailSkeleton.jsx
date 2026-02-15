@@ -1,6 +1,6 @@
 export default function MatchDetailSkeleton() {
   return (
-    <section className="pp-page" aria-label="Loading match">
+    <section className="pp-page" aria-label="Loading match" role="status" aria-live="polite">
       <div className="pp-match-page-hero space-y-3">
         <div className="pp-skeleton h-6 w-24" />
         <div className="pp-skeleton h-8 w-44" />

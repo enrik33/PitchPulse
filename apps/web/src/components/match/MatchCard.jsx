@@ -45,16 +45,18 @@ export default function MatchCard({ match }) {
   const hasScore = homeScore !== null && homeScore !== undefined && awayScore !== null && awayScore !== undefined;
   const homeLeads = hasScore && Number(homeScore) > Number(awayScore);
   const awayLeads = hasScore && Number(awayScore) > Number(homeScore);
+  const kickoff = formatKickoff(match.utcDate);
+  const a11yScore = `${homeScore ?? "-"} to ${awayScore ?? "-"}`;
 
   return (
     <Link
       to={`/match/${match.id}`}
       className="pp-match-card pp-match-card-premium group"
-      aria-label={`${homeName} vs ${awayName}`}
+      aria-label={`${homeName} versus ${awayName}, ${statusLabel}, score ${a11yScore}, kickoff ${kickoff}`}
     >
       <div className="flex items-center justify-between gap-3">
         <p className={`pp-status-chip ${statusTone}`}>{statusLabel}</p>
-        <p className="pp-muted text-xs font-medium">Kickoff {formatKickoff(match.utcDate)}</p>
+        <p className="pp-muted text-xs font-medium">Kickoff {kickoff}</p>
       </div>
 
       <div className="mt-4 space-y-3">

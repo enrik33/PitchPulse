@@ -1,6 +1,6 @@
 export default function StandingsSkeleton() {
   return (
-    <section className="pp-page" aria-label="Loading standings">
+    <section className="pp-page" aria-label="Loading standings" role="status" aria-live="polite">
       <div className="pp-standings-hero space-y-3">
         <div className="pp-skeleton h-6 w-24" />
         <div className="pp-skeleton h-8 w-48" />

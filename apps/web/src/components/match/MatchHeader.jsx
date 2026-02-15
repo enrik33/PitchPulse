@@ -71,7 +71,10 @@ function TeamBadge({ team }) {
 
 function TeamPanel({ team, score, align = "left" }) {
   const name = team?.name ?? "Unknown Team";
-  const alignClass = align === "right" ? "items-end text-right" : "items-start text-left";
+  const alignClass =
+    align === "right"
+      ? "items-center text-center sm:items-end sm:text-right"
+      : "items-center text-center sm:items-start sm:text-left";
 
   return (
     <div className={`flex flex-1 flex-col gap-3 ${alignClass}`}>
@@ -101,9 +104,9 @@ export default function MatchHeader({ match }) {
           </p>
         </div>
 
-        <div className="mt-5 flex items-center gap-3 md:gap-6">
+        <div className="mt-5 flex flex-col items-stretch gap-4 sm:flex-row sm:items-center sm:gap-6">
           <TeamPanel team={homeTeam} score={homeScore} />
-          <div className="flex flex-col items-center gap-2">
+          <div className="flex shrink-0 flex-col items-center gap-2">
             <p className="pp-muted text-xs font-semibold uppercase tracking-[0.12em]">Scoreline</p>
             <p className="rounded-full border border-slate-300 px-4 py-2 text-xs font-bold uppercase tracking-wide text-slate-700">
               vs
