@@ -79,7 +79,7 @@
     border-radius: var(--pp-radius-lg);
     border-color: rgba(var(--pp-neutral-200), 0.95);
     background-color: rgba(var(--pp-white), 0.9);
-    box-shadow: var(--pp-shadow-md);
+    box-shadow: 0 14px 34px rgba(20, 24, 28, 0.08);
   }
 
   .pp-nav {
@@ -246,7 +246,7 @@
   }
 
   .pp-surface {
-    @apply border;
+    @apply border transition-shadow;
     border-color: rgb(var(--pp-neutral-200));
     border-radius: var(--pp-radius-md);
     background-color: rgb(var(--pp-white));
@@ -260,7 +260,46 @@
   .pp-state-panel {
     @apply border p-6 text-center;
     border-radius: var(--pp-radius-lg);
-    box-shadow: var(--pp-shadow-sm);
+    box-shadow: 0 8px 20px rgba(20, 24, 28, 0.06);
+  }
+
+  .pp-state-eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.14em];
+    color: rgb(var(--pp-neutral-500));
+  }
+
+  .pp-state-marker {
+    @apply mt-2 text-3xl leading-none;
+    color: rgb(var(--pp-neutral-700));
+  }
+
+  .pp-state-title {
+    @apply mt-3 text-lg font-semibold;
+  }
+
+  .pp-state-copy {
+    @apply mt-1 text-sm;
+  }
+
+  .pp-state-action {
+    @apply mt-4 inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-semibold no-underline transition-colors;
+    background-color: rgb(var(--pp-brand-600));
+    color: rgb(var(--pp-white));
+  }
+
+  .pp-state-action:hover {
+    background-color: rgb(var(--pp-brand-700));
+  }
+
+  .pp-state-action:focus-visible {
+    outline: 3px solid rgba(var(--pp-brand-500), 0.35);
+    outline-offset: 2px;
+  }
+
+  .pp-state-loading {
+    background:
+      radial-gradient(circle at 12% -10%, rgba(var(--pp-brand-500), 0.14), transparent 42%),
+      linear-gradient(180deg, rgba(var(--pp-white), 0.99), rgba(var(--pp-neutral-50), 0.95));
   }
 
   .pp-state-empty {
@@ -312,6 +351,7 @@
 
   .pp-status-chip {
     @apply inline-flex items-center rounded-full px-2 py-1 text-xs font-semibold;
+    letter-spacing: 0.01em;
     background-color: rgb(var(--pp-brand-100));
     color: rgb(var(--pp-brand-700));
   }
@@ -398,7 +438,7 @@
     border-radius: var(--pp-radius-md);
     border-color: rgb(var(--pp-neutral-200));
     background-color: rgb(var(--pp-white));
-    box-shadow: var(--pp-shadow-sm);
+    box-shadow: 0 8px 22px rgba(20, 24, 28, 0.06);
   }
 
   .pp-table-head {

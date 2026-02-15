@@ -1,11 +1,16 @@
-export default function ErrorState({ title = "Something went wrong", message = "Please try again." }) {
+export default function ErrorState({
+  title = "Something went wrong",
+  message = "Please try again.",
+  eyebrow = "Error"
+}) {
   return (
     <div className="pp-state-panel pp-state-error">
-      <p className="text-2xl leading-none" aria-hidden="true">
+      <p className="pp-state-eyebrow">{eyebrow}</p>
+      <p className="pp-state-marker" aria-hidden="true">
         !
       </p>
-      <p className="text-lg font-semibold">{title}</p>
-      <p className="text-sm">{message}</p>
+      <p className="pp-state-title">{title}</p>
+      <p className="pp-state-copy">{message}</p>
     </div>
   );
 }
