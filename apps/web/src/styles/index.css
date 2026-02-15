@@ -52,6 +52,7 @@
     margin: 0;
     font-family: "Segoe UI", "Inter", system-ui, -apple-system, sans-serif;
     color: rgb(var(--pp-neutral-900));
+    overflow-x: hidden;
     background:
       radial-gradient(1200px 400px at 20% -10%, rgba(34, 197, 94, 0.12), transparent 60%),
       linear-gradient(rgb(var(--pp-neutral-50)), rgb(var(--pp-white)));
@@ -63,11 +64,12 @@
     @apply min-h-screen;
     position: relative;
     isolation: isolate;
+    overflow-x: clip;
     color: rgb(var(--pp-neutral-900));
   }
 
   .pp-page-container {
-    @apply mx-auto max-w-6xl px-4 py-8;
+    @apply mx-auto max-w-6xl px-4 py-6 md:py-8;
   }
 
   .pp-shell-content {
@@ -128,6 +130,12 @@
     color: rgb(var(--pp-white));
   }
 
+  .pp-nav-link:focus-visible,
+  .pp-nav-toggle:focus-visible {
+    outline: 3px solid rgba(var(--pp-brand-500), 0.35);
+    outline-offset: 2px;
+  }
+
   .pp-nav-links {
     @apply items-center gap-2;
   }
@@ -175,6 +183,14 @@
 
   .pp-page {
     @apply space-y-5;
+  }
+
+  .pp-page > * {
+    animation: pp-fade-up 300ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .pp-page > *:nth-child(2) {
+    animation-delay: 60ms;
   }
 
   .pp-page-title {
@@ -279,6 +295,7 @@
 
   .pp-state-copy {
     @apply mt-1 text-sm;
+    color: rgb(var(--pp-neutral-700));
   }
 
   .pp-state-action {
@@ -393,6 +410,14 @@
     border-spacing: 0;
   }
 
+  .pp-standings-head-cell {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background-color: rgb(var(--pp-neutral-100));
+    box-shadow: inset 0 -1px 0 rgb(var(--pp-neutral-200));
+  }
+
   .pp-standings-row {
     transition: background-color 140ms ease;
   }
@@ -433,6 +458,13 @@
     border: 1px solid rgb(var(--pp-neutral-200));
   }
 
+  .pp-standings-row-animate {
+    opacity: 0;
+    transform: translateY(4px);
+    animation: pp-row-enter 280ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: var(--pp-row-delay, 0ms);
+  }
+
   .pp-table-wrap {
     @apply overflow-x-auto border;
     border-radius: var(--pp-radius-md);
@@ -444,5 +476,53 @@
   .pp-table-head {
     background-color: rgb(var(--pp-neutral-100));
     color: rgb(var(--pp-neutral-700));
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @keyframes pp-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(3px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pp-row-enter {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pp-page > *,
+    .pp-standings-row-animate {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+
+    .pp-match-card,
+    .pp-standings-row,
+    .pp-state-action,
+    .pp-nav-link,
+    .pp-nav-toggle {
+      transition: none;
+    }
   }
 }

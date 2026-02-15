@@ -1,6 +1,6 @@
 export default function LoadingSkeleton() {
   return (
-    <section className="pp-page" aria-label="Loading">
+    <section className="pp-page" aria-label="Loading" role="status" aria-live="polite">
       <div className="pp-state-panel pp-state-loading space-y-4">
         <div className="space-y-3">
           <div className="pp-skeleton h-5 w-24" />

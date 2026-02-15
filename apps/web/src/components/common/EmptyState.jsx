@@ -9,7 +9,7 @@ export default function EmptyState({
   actionTo
 }) {
   return (
-    <div className="pp-state-panel pp-state-empty">
+    <div className="pp-state-panel pp-state-empty" role="status" aria-live="polite">
       <p className="pp-state-eyebrow">{eyebrow}</p>
       <p className="pp-state-marker" aria-hidden="true">
         {marker}

@@ -44,8 +44,13 @@ export default function StandingsTable({ rows = [] }) {
   return (
     <section className="pp-standings-wrap">
       <div className="md:hidden space-y-2">
-        {rows.map((row) => (
-          <article key={row.team?.id ?? row.position} className={`pp-standings-mobile-card ${topTierClass(row.position)}`}>
+        {rows.map((row, index) => (
+          <article
+            key={row.team?.id ?? row.position}
+            className={`pp-standings-mobile-card pp-standings-row-animate ${topTierClass(row.position)}`}
+            style={{ "--pp-row-delay": `${index * 28}ms` }}
+            aria-label={`Position ${row.position ?? "-"}, ${row.team?.name ?? "Unknown Team"}, ${row.points ?? 0} points`}
+          >
             <div className="flex items-center gap-3">
               <div className="pp-rank-badge">{row.position ?? "-"}</div>
               <TeamBadge team={row.team} />
@@ -69,18 +74,23 @@ export default function StandingsTable({ rows = [] }) {
 
       <div className="pp-table-wrap hidden md:block">
         <table className="pp-standings-table min-w-full text-left text-sm">
+          <caption className="sr-only">LaLiga standings table with position, played matches, goal difference and points</caption>
           <thead className="pp-table-head">
             <tr>
-              <th className="px-4 py-3">Pos</th>
-              <th className="px-4 py-3">Team</th>
-              <th className="px-4 py-3 text-right">P</th>
-              <th className="px-4 py-3 text-right">GD</th>
-              <th className="px-4 py-3 text-right">Pts</th>
+              <th scope="col" className="pp-standings-head-cell px-4 py-3">Pos</th>
+              <th scope="col" className="pp-standings-head-cell px-4 py-3">Team</th>
+              <th scope="col" className="pp-standings-head-cell px-4 py-3 text-right">P</th>
+              <th scope="col" className="pp-standings-head-cell px-4 py-3 text-right">GD</th>
+              <th scope="col" className="pp-standings-head-cell px-4 py-3 text-right">Pts</th>
             </tr>
           </thead>
           <tbody>
-            {rows.map((row) => (
-              <tr key={row.team?.id ?? row.position} className={`pp-standings-row ${topTierClass(row.position)}`}>
+            {rows.map((row, index) => (
+              <tr
+                key={row.team?.id ?? row.position}
+                className={`pp-standings-row pp-standings-row-animate ${topTierClass(row.position)}`}
+                style={{ "--pp-row-delay": `${index * 28}ms` }}
+              >
                 <td className="px-4 py-3">
                   <div className="pp-rank-badge">{row.position ?? "-"}</div>
                 </td>

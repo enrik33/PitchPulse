@@ -4,7 +4,7 @@ export default function ErrorState({
   eyebrow = "Error"
 }) {
   return (
-    <div className="pp-state-panel pp-state-error">
+    <div className="pp-state-panel pp-state-error" role="alert" aria-live="assertive">
       <p className="pp-state-eyebrow">{eyebrow}</p>
       <p className="pp-state-marker" aria-hidden="true">
         !
