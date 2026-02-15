@@ -194,6 +194,15 @@
       linear-gradient(180deg, rgba(var(--pp-white), 0.98), rgba(var(--pp-neutral-50), 0.95));
   }
 
+  .pp-standings-hero {
+    @apply border p-4 md:p-5;
+    border-radius: var(--pp-radius-lg);
+    border-color: rgba(var(--pp-neutral-200), 0.95);
+    background:
+      radial-gradient(circle at 12% 25%, rgba(var(--pp-brand-500), 0.17), transparent 44%),
+      linear-gradient(180deg, rgba(var(--pp-white), 0.98), rgba(var(--pp-neutral-50), 0.95));
+  }
+
   .pp-surface {
     @apply border;
     border-color: rgb(var(--pp-neutral-200));
@@ -283,6 +292,63 @@
   .pp-status-chip-neutral {
     background-color: rgb(var(--pp-brand-100));
     color: rgb(var(--pp-brand-700));
+  }
+
+  .pp-standings-wrap {
+    @apply space-y-3;
+  }
+
+  .pp-standings-mobile-card {
+    @apply grid items-center gap-2 border bg-white p-3;
+    grid-template-columns: 1fr auto;
+    border-radius: var(--pp-radius-md);
+    border-color: rgb(var(--pp-neutral-200));
+    box-shadow: var(--pp-shadow-sm);
+  }
+
+  .pp-standings-table {
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  .pp-standings-row {
+    transition: background-color 140ms ease;
+  }
+
+  .pp-standings-row:hover {
+    background-color: rgb(248 250 252);
+  }
+
+  .pp-standings-row + .pp-standings-row td {
+    border-top: 1px solid rgb(var(--pp-neutral-200));
+  }
+
+  .pp-standings-row-top {
+    box-shadow: inset 4px 0 0 rgb(21 128 61);
+    background-color: rgb(240 253 244);
+  }
+
+  .pp-standings-row-elite {
+    box-shadow: inset 4px 0 0 rgb(5 150 105);
+    background-color: rgb(236 253 245);
+  }
+
+  .pp-standings-row-contender {
+    box-shadow: inset 4px 0 0 rgb(14 116 144);
+    background-color: rgb(236 254 255);
+  }
+
+  .pp-rank-badge {
+    @apply inline-flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold;
+    background-color: rgb(var(--pp-neutral-100));
+    color: rgb(var(--pp-neutral-900));
+  }
+
+  .pp-team-crest-fallback {
+    @apply inline-flex h-7 w-7 items-center justify-center rounded-full text-[10px] font-bold;
+    background-color: rgb(var(--pp-neutral-100));
+    color: rgb(var(--pp-neutral-700));
+    border: 1px solid rgb(var(--pp-neutral-200));
   }
 
   .pp-table-wrap {
