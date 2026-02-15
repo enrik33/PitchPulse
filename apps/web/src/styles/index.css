@@ -61,6 +61,8 @@
 @layer components {
   .pp-app-shell {
     @apply min-h-screen;
+    position: relative;
+    isolation: isolate;
     color: rgb(var(--pp-neutral-900));
   }
 
@@ -68,15 +70,47 @@
     @apply mx-auto max-w-6xl px-4 py-8;
   }
 
+  .pp-shell-content {
+    @apply relative z-10;
+  }
+
+  .pp-page-frame {
+    @apply border px-4 py-5 md:px-6 md:py-6;
+    border-radius: var(--pp-radius-lg);
+    border-color: rgba(var(--pp-neutral-200), 0.95);
+    background-color: rgba(var(--pp-white), 0.9);
+    box-shadow: var(--pp-shadow-md);
+  }
+
   .pp-nav {
-    @apply border-b;
+    @apply sticky top-0 z-50 border-b;
     border-color: rgb(var(--pp-neutral-200));
-    background-color: rgba(var(--pp-white), 0.85);
-    backdrop-filter: blur(8px);
+    background-color: rgba(var(--pp-white), 0.8);
+    backdrop-filter: blur(12px);
   }
 
   .pp-nav-inner {
-    @apply mx-auto flex max-w-6xl items-center gap-2 px-4 py-3;
+    @apply mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3;
+  }
+
+  .pp-brand {
+    @apply inline-flex items-center gap-2 no-underline;
+  }
+
+  .pp-brand-mark {
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 999px;
+    background:
+      radial-gradient(circle at 35% 35%, rgb(var(--pp-brand-500)), rgb(var(--pp-brand-700)));
+    box-shadow: 0 0 0 4px rgba(var(--pp-brand-100), 0.8);
+  }
+
+  .pp-brand-word {
+    font-size: var(--pp-text-xl);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: rgb(var(--pp-neutral-950));
   }
 
   .pp-nav-link {
@@ -94,8 +128,53 @@
     color: rgb(var(--pp-white));
   }
 
+  .pp-nav-links {
+    @apply items-center gap-2;
+  }
+
+  .pp-nav-toggle {
+    @apply rounded-md border px-3 py-2 text-sm font-semibold transition-colors;
+    border-color: rgb(var(--pp-neutral-300));
+    color: rgb(var(--pp-neutral-700));
+    background-color: rgba(var(--pp-white), 0.92);
+  }
+
+  .pp-nav-toggle:hover {
+    background-color: rgb(var(--pp-neutral-100));
+    color: rgb(var(--pp-neutral-900));
+  }
+
+  .pp-nav-mobile {
+    @apply mx-auto grid max-w-6xl gap-2 px-4 pb-3 md:hidden;
+    border-top: 1px solid rgb(var(--pp-neutral-200));
+    background-color: rgba(var(--pp-white), 0.9);
+  }
+
+  .pp-bg-orb {
+    position: absolute;
+    width: 26rem;
+    height: 26rem;
+    border-radius: 999px;
+    filter: blur(70px);
+    opacity: 0.45;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .pp-bg-orb-left {
+    top: -12rem;
+    left: -9rem;
+    background: rgba(var(--pp-brand-500), 0.33);
+  }
+
+  .pp-bg-orb-right {
+    top: -8rem;
+    right: -12rem;
+    background: rgba(var(--pp-neutral-300), 0.45);
+  }
+
   .pp-page {
-    @apply space-y-4;
+    @apply space-y-5;
   }
 
   .pp-page-title {
@@ -103,6 +182,7 @@
     font-weight: 700;
     letter-spacing: -0.02em;
     color: rgb(var(--pp-neutral-950));
+    line-height: 1.15;
   }
 
   .pp-surface {
