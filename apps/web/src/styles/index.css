@@ -203,6 +203,48 @@
       linear-gradient(180deg, rgba(var(--pp-white), 0.98), rgba(var(--pp-neutral-50), 0.95));
   }
 
+  .pp-match-page-hero {
+    @apply border p-4 md:p-5;
+    border-radius: var(--pp-radius-lg);
+    border-color: rgba(var(--pp-neutral-200), 0.95);
+    background:
+      radial-gradient(circle at 86% 22%, rgba(var(--pp-brand-500), 0.16), transparent 44%),
+      linear-gradient(180deg, rgba(var(--pp-white), 0.98), rgba(var(--pp-neutral-50), 0.95));
+  }
+
+  .pp-match-detail-shell {
+    @apply space-y-4;
+  }
+
+  .pp-match-detail-hero {
+    @apply border p-4 md:p-6;
+    border-radius: var(--pp-radius-lg);
+    border-color: rgba(var(--pp-neutral-200), 0.95);
+    background:
+      radial-gradient(circle at 50% -25%, rgba(var(--pp-brand-500), 0.14), transparent 50%),
+      linear-gradient(180deg, rgba(var(--pp-white), 0.98), rgba(var(--pp-neutral-50), 0.94));
+    box-shadow: var(--pp-shadow-md);
+  }
+
+  .pp-team-crest-lg-fallback {
+    @apply inline-flex h-12 w-12 items-center justify-center rounded-full text-xs font-bold;
+    background-color: rgb(var(--pp-neutral-100));
+    color: rgb(var(--pp-neutral-700));
+    border: 1px solid rgb(var(--pp-neutral-200));
+  }
+
+  .pp-match-meta-grid {
+    @apply grid gap-3 md:grid-cols-2;
+  }
+
+  .pp-match-meta-card {
+    @apply border p-4;
+    border-radius: var(--pp-radius-md);
+    border-color: rgb(var(--pp-neutral-200));
+    background-color: rgba(var(--pp-white), 0.92);
+    box-shadow: var(--pp-shadow-sm);
+  }
+
   .pp-surface {
     @apply border;
     border-color: rgb(var(--pp-neutral-200));
