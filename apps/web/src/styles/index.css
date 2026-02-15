@@ -185,6 +185,15 @@
     line-height: 1.15;
   }
 
+  .pp-today-hero {
+    @apply border p-4 md:p-5;
+    border-radius: var(--pp-radius-lg);
+    border-color: rgba(var(--pp-neutral-200), 0.95);
+    background:
+      radial-gradient(circle at 85% 20%, rgba(var(--pp-brand-500), 0.16), transparent 42%),
+      linear-gradient(180deg, rgba(var(--pp-white), 0.98), rgba(var(--pp-neutral-50), 0.95));
+  }
+
   .pp-surface {
     @apply border;
     border-color: rgb(var(--pp-neutral-200));
@@ -197,13 +206,24 @@
     color: rgb(var(--pp-neutral-500));
   }
 
+  .pp-state-panel {
+    @apply border p-6 text-center;
+    border-radius: var(--pp-radius-lg);
+    box-shadow: var(--pp-shadow-sm);
+  }
+
   .pp-state-empty {
-    @apply p-6 text-center;
+    background:
+      radial-gradient(circle at 50% -10%, rgba(var(--pp-brand-500), 0.12), transparent 38%),
+      rgb(var(--pp-white));
+    border-color: rgb(var(--pp-neutral-200));
   }
 
   .pp-state-error {
-    @apply border p-4;
-    border-radius: var(--pp-radius-md);
+    background:
+      radial-gradient(circle at 90% -5%, rgba(248, 113, 113, 0.16), transparent 44%),
+      rgb(254, 242, 242);
+    border-radius: var(--pp-radius-lg);
     border-color: rgb(254 202 202);
     background-color: rgb(254 242 242);
     color: rgb(153 27 27);
@@ -228,8 +248,39 @@
     box-shadow: var(--pp-shadow-md);
   }
 
+  .pp-match-card:focus-visible {
+    outline: 3px solid rgba(var(--pp-brand-500), 0.35);
+    outline-offset: 2px;
+  }
+
+  .pp-match-card-premium {
+    background:
+      linear-gradient(180deg, rgba(var(--pp-white), 0.99), rgba(var(--pp-neutral-50), 0.95));
+    min-height: 13rem;
+  }
+
   .pp-status-chip {
     @apply inline-flex items-center rounded-full px-2 py-1 text-xs font-semibold;
+    background-color: rgb(var(--pp-brand-100));
+    color: rgb(var(--pp-brand-700));
+  }
+
+  .pp-status-chip-live {
+    background-color: rgb(220, 252, 231);
+    color: rgb(21, 128, 61);
+  }
+
+  .pp-status-chip-finished {
+    background-color: rgb(226, 232, 240);
+    color: rgb(51, 65, 85);
+  }
+
+  .pp-status-chip-delayed {
+    background-color: rgb(254, 226, 226);
+    color: rgb(153, 27, 27);
+  }
+
+  .pp-status-chip-neutral {
     background-color: rgb(var(--pp-brand-100));
     color: rgb(var(--pp-brand-700));
   }
