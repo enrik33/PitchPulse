@@ -7,10 +7,20 @@ import { useMatch } from "../hooks/useMatch";
 
 export default function MatchPage() {
   const { matchId } = useParams();
-  const { data, isLoading, isError, error } = useMatch(matchId);
+  const { data, isLoading, isError, error, refetch } = useMatch(matchId);
 
   if (isLoading) return <MatchDetailSkeleton />;
-  if (isError) return <ErrorState title="Unable to load match" message={error?.message} />;
+  if (isError) {
+    return (
+      <ErrorState
+        title="Unable to load match"
+        message={error?.message}
+        onRetry={() => {
+          refetch();
+        }}
+      />
+    );
+  }
   if (!data) {
     return (
       <EmptyState

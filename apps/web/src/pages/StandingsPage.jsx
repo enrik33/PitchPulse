@@ -4,14 +4,24 @@ import StandingsSkeleton from "../components/standings/StandingsSkeleton";
 import ErrorState from "../components/common/ErrorState";
 
 export default function StandingsPage() {
-  const { data, isLoading, isError, error } = useStandings();
+  const { data, isLoading, isError, error, refetch } = useStandings();
   const updatedLabel = new Intl.DateTimeFormat("en-US", {
     month: "short",
     day: "numeric"
   }).format(new Date());
 
   if (isLoading) return <StandingsSkeleton />;
-  if (isError) return <ErrorState title="Unable to load standings" message={error?.message} />;
+  if (isError) {
+    return (
+      <ErrorState
+        title="Unable to load standings"
+        message={error?.message}
+        onRetry={() => {
+          refetch();
+        }}
+      />
+    );
+  }
 
   return (
     <section className="pp-page">

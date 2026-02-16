@@ -1,7 +1,9 @@
 export default function ErrorState({
   title = "Something went wrong",
   message = "Please try again.",
-  eyebrow = "Error"
+  eyebrow = "Error",
+  actionLabel = "Try again",
+  onRetry
 }) {
   return (
     <div className="pp-state-panel pp-state-error" role="alert" aria-live="assertive">
@@ -11,6 +13,11 @@ export default function ErrorState({
       </p>
       <p className="pp-state-title">{title}</p>
       <p className="pp-state-copy">{message}</p>
+      {typeof onRetry === "function" ? (
+        <button type="button" className="pp-state-action" onClick={onRetry}>
+          {actionLabel}
+        </button>
+      ) : null}
     </div>
   );
 }
