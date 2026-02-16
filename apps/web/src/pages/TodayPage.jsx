@@ -4,7 +4,7 @@ import LoadingSkeleton from "../components/common/LoadingSkeleton";
 import ErrorState from "../components/common/ErrorState";
 
 export default function TodayPage() {
-  const { data, isLoading, isError, error } = useTodayMatches();
+  const { data, isLoading, isError, error, refetch } = useTodayMatches();
   const todayLabel = new Intl.DateTimeFormat("en-US", {
     weekday: "long",
     month: "long",
@@ -12,7 +12,17 @@ export default function TodayPage() {
   }).format(new Date());
 
   if (isLoading) return <LoadingSkeleton />;
-  if (isError) return <ErrorState message={error?.message} />;
+  if (isError) {
+    return (
+      <ErrorState
+        title="Unable to load today's matches"
+        message={error?.message}
+        onRetry={() => {
+          refetch();
+        }}
+      />
+    );
+  }
 
   return (
     <section className="pp-page">
