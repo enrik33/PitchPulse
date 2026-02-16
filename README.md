@@ -1,324 +1,175 @@
-﻿# PitchPulse - La Liga Match Center
+# PitchPulse
 
-PitchPulse is a full-stack app for La Liga fixtures, live-ish status, results, and standings.
+PitchPulse is a full-stack LaLiga match center with:
+- Today matches (`/`)
+- Standings (`/standings`)
+- Match detail (`/match/:matchId`)
 
-The MVP goal is a clean, reliable product with a strict scope:
-- `Today` matches page
-- Standings page
-- Basic match detail page
-
-No event timeline, advanced stats, odds, or extra APIs in MVP.
-
----
-
-## MVP Scope (v1)
-
-### Pages
-- `/` (Today): today's La Liga matches (scheduled/live/finished), clickable cards
-- `/standings`: current La Liga table with badges
-- `/match/:matchId`: teams, badges, score, status, kickoff time, venue if available
-
-### Backend Endpoints (MVP)
-- `GET /api/health`
-- `GET /api/laliga/matches/today`
-- `GET /api/laliga/standings`
-- `GET /api/matches/:matchId`
-
-### Definition of Done (MVP)
-- No crashes on missing API fields
-- Loading skeletons and useful error states
-- Empty state when no matches are available for today
-- Mobile-friendly basic layout
-
----
-
-## Post-MVP Roadmap
-
-### Phase 2
-- Date range calendar/results page
-- Team page (recent matches + basic info)
-- i18n (English/Spanish toggle with `react-i18next`)
-
-### Phase 3
-- Weather snapshot at kickoff (optional)
-- Basic 1X2 odds (optional, show `Unavailable` fallback)
-
----
-
-## Tech Stack
-
-### Frontend
-- React (Vite)
-- React Router
-- TanStack Query
-- Tailwind CSS
-
-### Backend
-- Node.js + Express
-- Axios
-- node-cache
-- express-rate-limit
-- dotenv
-
-### External Data
-- football-data.org (`PD` competition code for La Liga)
-
----
-
-## Architecture
-
-Frontend never calls football-data.org directly.
-
-Flow:
-1. React frontend -> Express backend
-2. Express backend -> football-data.org
-3. Backend returns normalized JSON for frontend
-
-Why:
-- Protect API key
-- Respect free-tier rate limits
-- Centralize caching and data shaping
-
----
+## Stack
+- Frontend: React + Vite + React Router + TanStack Query + Tailwind
+- Backend: Node.js + Express + Axios + node-cache + express-rate-limit
+- Upstream data: football-data.org (`PD`)
 
 ## Project Structure
-
 ```text
-PitchPulse/
-  apps/
-    web/   # React frontend
-    api/   # Express backend
-  README.md
+apps/
+  api/  # Express backend
+  web/  # React frontend
 ```
 
----
+## Environment Variables
 
-## Backend Design Notes
-
-### Recommended API layering
-- `routes/` -> `controllers/` -> `services/` -> `providers/` -> `mappers/`
-
-This keeps external API calls, business logic, and response shaping separate.
-
-### Response contracts (frontend-facing)
-
-`MatchSummary`
-
-```js
-{
-  id,
-  utcDate,
-  status,
-  homeTeam: { id, name, crestUrl },
-  awayTeam: { id, name, crestUrl },
-  score: { home, away }
-}
-```
-
-`StandingsRow`
-
-```js
-{
-  position,
-  team: { id, name, crestUrl },
-  played,
-  gd,
-  points
-}
-```
-
-Do not rely on extra fields from football-data.org.
-
-### Error shape
-
-```js
-{
-  error: {
-    code: "UPSTREAM_ERROR",
-    message: "Human-readable message",
-    requestId: "..."
-  }
-}
-```
-
----
-
-## Caching Strategy
-
-| Data Type | Cache Duration |
-|---|---|
-| Standings | 15 minutes |
-| Today's matches | 1-3 minutes |
-| Match detail (live) | 1-3 minutes |
-| Match detail (finished) | 24 hours |
-
-Also define "today" using `Europe/Madrid` timezone to avoid date mismatch bugs.
-
----
-
-## Local Development Setup
-
-## 1) Clone
-
-```bash
-git clone https://github.com/enrik33/PitchPulse.git
-cd PitchPulse
-```
-
-## 2) Backend
-
-```bash
-cd apps/api
-npm install
-```
-
-Create `apps/api/.env`:
-
+### API (`apps/api/.env`)
+Required:
 ```env
 PORT=4000
 X_AUTH_TOKEN=your_football_data_api_key
 ```
 
-Start backend:
+Template file exists at `apps/api/.env.example`.
 
-```bash
-npm run dev
+### Web (`apps/web/.env`)
+Recommended default:
+```env
+VITE_API_BASE_URL=/api
 ```
 
-## 3) Frontend
+Template file exists at `apps/web/.env.example`.
 
+## Quick Start (Fresh Clone)
+
+1. Install dependencies:
 ```bash
-cd apps/web
 npm install
+npm install --prefix apps/api
+npm install --prefix apps/web
+```
+
+2. Create env files:
+```bash
+cp apps/api/.env.example apps/api/.env
+cp apps/web/.env.example apps/web/.env
+```
+On Windows PowerShell:
+```powershell
+Copy-Item apps/api/.env.example apps/api/.env
+Copy-Item apps/web/.env.example apps/web/.env
+```
+
+3. Add your football-data token to `apps/api/.env` (`X_AUTH_TOKEN=...`).
+
+4. Start both apps:
+```bash
 npm run dev
 ```
 
-## 4) Vite Proxy
+5. Open:
+- Web: `http://localhost:5173`
+- API health: `http://localhost:4000/api/health`
 
-In `apps/web/vite.config.js`:
+## Scripts
 
-```js
-server: {
-  proxy: {
-    "/api": {
-      target: "http://localhost:4000",
-      changeOrigin: true
-    }
-  }
-}
+### Root
+- `npm run dev` -> start API + Web together
+- `npm run dev:api` -> API only
+- `npm run dev:web` -> Web only
+- `npm run build:web` -> production web build
+- `npm run test` -> run API tests then Web tests
+- `npm run test:api` -> API tests only
+- `npm run test:web` -> Web tests only
+- `npm run test:watch:api` -> API tests in watch mode
+- `npm run test:watch:web` -> Web tests in watch mode
+
+### API (`apps/api`)
+- `npm run dev`
+- `npm run start`
+- `npm run test`
+- `npm run test:watch`
+
+### Web (`apps/web`)
+- `npm run dev`
+- `npm run build`
+- `npm run preview`
+- `npm run test`
+- `npm run test:watch`
+
+## API Endpoints
+- `GET /api/health`
+- `GET /api/laliga/matches/today`
+- `GET /api/laliga/standings`
+- `GET /api/matches/:matchId`
+
+## Caching
+- Today matches: 1-3 minutes (current: 120s)
+- Standings: 15 minutes (900s)
+- Match detail:
+  - live/non-finished: 1-3 minutes (120s)
+  - finished/postponed/suspended/cancelled: 24h (86400s)
+
+Today date logic is calculated in `Europe/Madrid`.
+
+## Troubleshooting
+
+### 1) Token/config problems
+Symptoms:
+- API returns `500` with config/upstream message
+- Web shows "Unable to load ...", often with upstream error text
+
+Checks:
+- `apps/api/.env` exists
+- `X_AUTH_TOKEN` is set and valid
+- API restarted after `.env` changes
+
+Quick validation:
+```bash
+curl http://localhost:4000/api/health
+curl http://localhost:4000/api/laliga/matches/today
 ```
 
----
+### 2) Upstream rate limit or subscription restrictions
+Symptoms:
+- Errors from football-data.org such as permission/restricted/rate-limit messages
 
-## 10-Day Build Plan (Ticket Style)
+Notes:
+- Some match IDs may be restricted by your plan.
+- Try a match ID from `/api/laliga/matches/today`.
+- Caching is already enabled to reduce upstream pressure.
 
-Each day maps to a deliverable and acceptance criteria.
+### 3) API outage / upstream unavailable
+Symptoms:
+- `UPSTREAM_UNAVAILABLE` or timeout errors
 
-### Day 1 - Foundation
-Ticket: `PP-001 Monorepo bootstrap + health check`
-- Tasks:
-  - Confirm `apps/web` and `apps/api` layout
-  - Start both apps locally
-  - Wire Vite proxy to backend
-  - Implement `GET /api/health`
-- Acceptance criteria:
-  - Web and API run locally
-  - Frontend can call `/api/health` successfully
+What to do:
+- Confirm network connectivity
+- Retry after a short delay
+- Verify upstream status and token quota
 
-### Day 2 - Backend Core
-Ticket: `PP-002 Backend skeleton + middleware baseline`
-- Tasks:
-  - Add env loading, request logging, rate limit, cache utility
-  - Add global error handler with stable error JSON shape
-- Acceptance criteria:
-  - Middleware stack is active
-  - Invalid routes and upstream errors return normalized error payloads
+### 4) Web cannot reach API
+Symptoms:
+- Browser/network errors or consistent API failures from web app
 
-### Day 3 - Upstream Integration
-Ticket: `PP-003 football-data provider + mappers`
-- Tasks:
-  - Create Axios client for football-data.org
-  - Add provider/service layer
-  - Add mappers for `MatchSummary` and `StandingsRow`
-- Acceptance criteria:
-  - Internal service returns normalized data (not raw upstream payload)
+Checks:
+- API running on `:4000`
+- Web running on `:5173`
+- `apps/web/vite.config.js` proxy targets `http://localhost:4000`
+- `VITE_API_BASE_URL=/api` in `apps/web/.env`
 
-### Day 4 - Standings Feature
-Ticket: `PP-004 Standings API + UI`
-- Tasks:
-  - Implement `GET /api/laliga/standings` with 15m cache
-  - Build `/standings` page + `StandingsTable`
-- Acceptance criteria:
-  - Standings render with team badges
-  - Loading and error states exist
+### 5) Ports already in use
+Symptoms:
+- Dev server fails to start with port-in-use errors
 
-### Day 5 - Today Matches Feature
-Ticket: `PP-005 Today matches API + home page`
-- Tasks:
-  - Implement `GET /api/laliga/matches/today` with `Europe/Madrid` day logic
-  - Build home `MatchList` and `MatchCard` UI
-- Acceptance criteria:
-  - Home page shows today matches or empty state
-  - Cards link to `/match/:matchId`
+What to do:
+- Stop stale `node` processes
+- Restart `npm run dev`
 
-### Day 6 - Match Detail Feature
-Ticket: `PP-006 Match details API + page`
-- Tasks:
-  - Implement `GET /api/matches/:matchId`
-  - Add cache policy: live 1-3m, finished 24h
-  - Build `MatchHeader` and detail layout
-- Acceptance criteria:
-  - Page renders status, kickoff, score, badges, and optional venue
-  - Missing fields do not crash UI
+## Testing
+- API coverage includes:
+  - `GET /api/health`
+  - mapper correctness
+- Web coverage includes:
+  - loading/error/empty/basic render states for core pages
 
-### Day 7 - UX Hardening
-Ticket: `PP-007 UX polish and resilience`
-- Tasks:
-  - Replace raw loading text with skeletons
-  - Improve error copy and retry actions
-  - Validate responsive behavior
-- Acceptance criteria:
-  - No raw "Loading..." placeholders
-  - All three pages usable on mobile widths
-
-### Day 8 - Tests
-Ticket: `PP-008 Minimal test coverage for critical flows`
-- Tasks:
-  - Add backend tests for health + mapper correctness
-  - Add frontend tests for page rendering states
-- Acceptance criteria:
-  - Test suite passes locally
-  - Critical flows have baseline coverage
-
-### Day 9 - Docs and DevEx
-Ticket: `PP-009 README, .env.example, scripts`
-- Tasks:
-  - Add/refresh setup docs and run scripts
-  - Add troubleshooting section (rate limit, token, API downtime)
-- Acceptance criteria:
-  - Fresh clone setup works from docs without guesswork
-
-### Day 10 - MVP Freeze
-Ticket: `PP-010 Stabilization and MVP release`
-- Tasks:
-  - Bug bash and final cleanup
-  - Verify all MVP definitions of done
-  - Optional deployment smoke test
-- Acceptance criteria:
-  - MVP checklist fully complete
-  - Build is demo-ready
-
----
-
-## Security and Environment
-
-- Keep API token only in backend `.env`
-- Never commit secrets
-- Ensure `.env` is ignored by git
-- Frontend communicates only with your backend
-
----
-
-## Author
-
-Enrik Cipa
+Run all tests:
+```bash
+npm run test
+```

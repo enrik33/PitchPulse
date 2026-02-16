@@ -5,7 +5,13 @@
   "scripts": {
     "dev": "concurrently -n api,web -c cyan,magenta \"npm run dev --prefix apps/api\" \"npm run dev --prefix apps/web\"",
     "dev:api": "npm run dev --prefix apps/api",
-    "dev:web": "npm run dev --prefix apps/web"
+    "dev:web": "npm run dev --prefix apps/web",
+    "build:web": "npm run build --prefix apps/web",
+    "test": "npm run test:api && npm run test:web",
+    "test:api": "npm run test --prefix apps/api",
+    "test:web": "npm run test --prefix apps/web",
+    "test:watch:api": "npm run test:watch --prefix apps/api",
+    "test:watch:web": "npm run test:watch --prefix apps/web"
   },
   "devDependencies": {
     "concurrently": "^9.0.1"
